@@ -711,6 +711,7 @@ HEADERS += \
     src/comm/MAVLinkProtocol.h \
     src/comm/QGCMAVLink.h \
     src/comm/TCPLink.h \
+    src/comm/TCPDualPortLink.h \
     src/comm/UDPLink.h \
     src/comm/UdpIODevice.h \
     src/uas/UAS.h \
@@ -940,6 +941,7 @@ SOURCES += \
     src/comm/MAVLinkProtocol.cc \
     src/comm/QGCMAVLink.cc \
     src/comm/TCPLink.cc \
+    src/comm/TCPDualPortLink.cc \
     src/comm/UDPLink.cc \
     src/comm/UdpIODevice.cc \
     src/main.cc \

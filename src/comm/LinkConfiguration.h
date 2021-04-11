@@ -46,15 +46,16 @@ public:
     ///  Any changes here MUST be reflected in LinkManager::linkTypeStrings()
     enum LinkType {
 #ifndef NO_SERIAL_LINK
-        TypeSerial,     ///< Serial Link
+        TypeSerial,
 #endif
-        TypeUdp,        ///< UDP Link
-        TypeTcp,        ///< TCP Link
+        TypeUdp,
+        TypeTcp,
+        TypeTcpDualPort,
 #ifdef QGC_ENABLE_BLUETOOTH
-        TypeBluetooth,  ///< Bluetooth Link
+        TypeBluetooth,
 #endif
 #ifdef QT_DEBUG
-        TypeMock,       ///< Mock Link for Unitesting
+        TypeMock,
 #endif
         TypeLogReplay,
         TypeLast        // Last type value (type >= TypeLast == invalid)

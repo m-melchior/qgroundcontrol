@@ -34,6 +34,8 @@ add_library(comm
 	SerialLink.h
 	TCPLink.cc
 	TCPLink.h
+	TCPDualPortLink.cc
+	TCPDualPortLink.h
 	UdpIODevice.cc
 	UdpIODevice.h
 	UDPLink.cc

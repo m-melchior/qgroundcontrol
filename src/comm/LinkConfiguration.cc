@@ -13,6 +13,7 @@
 #endif
 #include "UDPLink.h"
 #include "TCPLink.h"
+#include "TCPDualPortLink.h"
 #include "LogReplayLink.h"
 #ifdef QGC_ENABLE_BLUETOOTH
 #include "BluetoothLink.h"
@@ -83,6 +84,9 @@ LinkConfiguration* LinkConfiguration::createSettings(int type, const QString& na
         case LinkConfiguration::TypeTcp:
             config = new TCPConfiguration(name);
             break;
+        case LinkConfiguration::TypeTcpDualPort:
+            config = new TCPDualPortConfiguration(name);
+            break;
 #ifdef QGC_ENABLE_BLUETOOTH
     case LinkConfiguration::TypeBluetooth:
         config = new BluetoothConfiguration(name);
@@ -118,6 +122,9 @@ LinkConfiguration* LinkConfiguration::duplicateSettings(LinkConfiguration* sourc
             break;
         case TypeTcp:
             dupe = new TCPConfiguration(qobject_cast<TCPConfiguration*>(source));
+            break;
+        case TypeTcpDualPort:
+            dupe = new TCPDualPortConfiguration(qobject_cast<TCPDualPortConfiguration*>(source));
             break;
 #ifdef QGC_ENABLE_BLUETOOTH
         case TypeBluetooth:

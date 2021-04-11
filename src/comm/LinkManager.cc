@@ -22,6 +22,7 @@
 #include "QGCApplication.h"
 #include "UDPLink.h"
 #include "TCPLink.h"
+#include "TCPDualPortLink.h"
 #include "SettingsManager.h"
 #include "LogReplayLink.h"
 #ifdef QGC_ENABLE_BLUETOOTH
@@ -118,6 +119,9 @@ bool LinkManager::createConnectedLink(SharedLinkConfigurationPtr& config, bool i
         break;
     case LinkConfiguration::TypeTcp:
         link = std::make_shared<TCPLink>(config);
+        break;
+    case LinkConfiguration::TypeTcpDualPort:
+        link = std::make_shared<TCPDualPortLink>(config);
         break;
 #ifdef QGC_ENABLE_BLUETOOTH
     case LinkConfiguration::TypeBluetooth:
@@ -305,6 +309,9 @@ void LinkManager::loadLinkConfigurationList()
                                 break;
                             case LinkConfiguration::TypeTcp:
                                 link = new TCPConfiguration(name);
+                                break;
+                            case LinkConfiguration::TypeTcpDualPort:
+                                link = new TCPDualPortConfiguration(name);
                                 break;
 #ifdef QGC_ENABLE_BLUETOOTH
                             case LinkConfiguration::TypeBluetooth:
@@ -611,6 +618,7 @@ QStringList LinkManager::linkTypeStrings(void) const
 #endif
         list += tr("UDP");
         list += tr("TCP");
+        list += tr("TCP Dual Port");
 #ifdef QGC_ENABLE_BLUETOOTH
         list += "Bluetooth";
 #endif
@@ -748,6 +756,14 @@ void LinkManager::_fixUnnamed(LinkConfiguration* config)
                 if(tconfig) {
                     config->setName(
                                 QString("TCP Link %1:%2").arg(tconfig->address().toString()).arg(static_cast<int>(tconfig->port())));
+                }
+            }
+                break;
+            case LinkConfiguration::TypeTcpDualPort: {
+            	TCPDualPortConfiguration* tconfig = dynamic_cast<TCPDualPortConfiguration*>(config);
+                if(tconfig) {
+                    config->setName(
+                                QString("TCP DualPort Link To %1:%2 and From %1:%3").arg(tconfig->address().toString()).arg(static_cast<int>(tconfig->portTo())).arg(static_cast<int>(tconfig->portFrom())));
                 }
             }
                 break;

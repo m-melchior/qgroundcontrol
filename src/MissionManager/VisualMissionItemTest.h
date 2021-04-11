@@ -11,6 +11,7 @@
 
 #include "UnitTest.h"
 #include "TCPLink.h"
+#include "TCPDualPortLink.h"
 #include "MultiSignalSpy.h"
 #include "SimpleMissionItem.h"
 
