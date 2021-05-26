@@ -131,7 +131,7 @@ bool TCPDualPortLink::_hardwareConnect()
     QObject::connect(_socketTo, nullptr, this, nullptr);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    QSignalSpy errorSpy(_socketTo, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error));
+    QSignalSpy errorSpyTo(_socketTo, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error));
 #else
     QSignalSpy errorSpyTo(_socketTo, &QAbstractSocket::errorOccurred);
 #endif
@@ -164,7 +164,7 @@ bool TCPDualPortLink::_hardwareConnect()
     QObject::connect(_socketFrom, &QIODevice::readyRead, this, &TCPDualPortLink::_readBytes);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    QSignalSpy errorSpy(_socketFrom, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error));
+    QSignalSpy errorSpyFrom(_socketFrom, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error));
 #else
     QSignalSpy errorSpyFrom(_socketFrom, &QAbstractSocket::errorOccurred);
 #endif
